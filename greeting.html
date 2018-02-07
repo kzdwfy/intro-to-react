@@ -13,6 +13,38 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
 
     <script type="text/babel">
+
+
+
+    class Timer extends React.Component {
+      constructor(props) {
+        super(props);
+        this.state = { seconds: 0 };
+      }
+
+      tick() {
+        this.setState(prevState => ({
+          seconds: prevState.seconds + 1
+        }));
+      }
+
+      componentDidMount() {
+        this.interval = setInterval(() => this.tick(), 1000);
+      }
+
+      componentWillUnmount() {
+        clearInterval(this.interval);
+      }
+
+      render() {
+        return (
+          <div>
+            Seconds: {this.state.seconds}
+          </div>
+        );
+      }
+    }
+
       class Greeting extends React.Component {
         render() {
           return (
@@ -24,8 +56,10 @@
         }
       }
 
+const App = () => <div><Timer/><Greeting name="Taylor"/></div>;
+
       ReactDOM.render(
-        <Greeting name ="Taylor" />, document.getElementById('app')
+        <App/>, document.getElementById('app')
 
       );
 
@@ -42,38 +76,11 @@
 ReactDOM.render(
   <HelloMessage name="Taylor" />,
   mountNode
-);
+);*/
 
-    /*  class Timer extends React.Component {
-        constructor(props) {
-          super(props);
-          this.state = { seconds: 0 };
-        }
 
-        tick() {
-          this.setState(prevState => ({
-            seconds: prevState.seconds + 1
-          }));
-        }
 
-        componentDidMount() {
-          this.interval = setInterval(() => this.tick(), 1000);
-        }
 
-        componentWillUnmount() {
-          clearInterval(this.interval);
-        }
-
-        render() {
-          return (
-            <div>
-              Seconds: {this.state.seconds}
-            </div>
-          );
-        }
-      }
-
-      ReactDOM.render(<Timer />, mountNode);*/
     </script>
   </body>
 
